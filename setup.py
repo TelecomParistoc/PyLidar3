@@ -8,10 +8,10 @@ setuptools.setup(
     version="1.6",
     author="Lakshman mallidi",
     author_email="lakshman.mallidi@gmail.com",
-    description="Library for Lidar. Currently supports YdLidar(X4,G4) from http://www.ydlidar.com",
+    description="Fork of a Lidar library. Currently supports YdLidar(X4,G4) from http://www.ydlidar.com",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/lakshmanmallidi/PyLidar3",
+    url="https://github.com/TelecomParistoc/PyLidar3",
     packages=['PyLidar3'],
     install_requires=[
         'pyserial',

@@ -6,7 +6,7 @@
 
 ## Source code
 Source code is available on github's repository. <br />
-[https://github.com/lakshmanmallidi/PyLidar3/blob/master/PyLidar3/\__init.py\_\_](https://github.com/lakshmanmallidi/PyLidar3/blob/master/PyLidar3/__init__.py)
+[https://github.com/TelecomParistoc/PyLidar3/blob/master/PyLidar3/\__init.py\_\_](https://github.com/TelecomParistoc/PyLidar3/blob/master/PyLidar3/__init__.py)
 
 ## Dependencies
 * pyserial
@@ -15,12 +15,7 @@ Source code is available on github's repository. <br />
 * enum
 
 ## Installation
-
-##### Using Pip
-```
-pip install PyLidar3
-```
-You can also install using setup.py file from git repository.
+You can install using setup.py file from git repository.
 
 ## Usage
 This package consists of multiple classes representing the version of lidar you are using. The class structure is YdLidarX4 where X4 is version name ydlidar. Further contribution are actively accepted. 
@@ -185,10 +180,6 @@ else:
     print("Error connecting to device")
 
 ```
-## Testing
-
-A "tesing" branch is maintained in the git repository for testing, debugging and updating the code. Please visit Github repo [https://github.com/lakshmanmallidi/PyLidar3](https://github.com/lakshmanmallidi/PyLidar3) for further information. 
-
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Flakshmanmallidi%2FPyLidar3.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Flakshmanmallidi%2FPyLidar3?ref=badge_large)
