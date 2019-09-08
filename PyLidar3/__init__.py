@@ -22,6 +22,7 @@ class YdLidarX4:
 
     def Connect(self):
         """Begin serial connection with Lidar by opening serial port.\nReturn success status True/False.\n"""
+        # print("Hello")
         try:
             if not self._is_connected:
                 self._s = Serial(self._port, self._baudrate)
