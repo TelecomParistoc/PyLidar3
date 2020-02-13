@@ -97,43 +97,40 @@ class YdLidarX4:
             return int(sum(data)/len(data))
         return 0
 
-    def StartScanning(self):
+    def StartScanning(self, start_angle=0, end_angle=360):
         """Begin the lidar and returns a generator
-        which returns a dictionary consisting angle(degrees) and distance(meters).\n
-        Return Format : {angle(1):distance, angle(2):distance,....................,angle(360):distance}."""
-        if self._is_connected:
-            if not self._is_scanning:
-                self._is_scanning = True
-                self._s.reset_input_buffer()
-                if "YdLidarX4" in str(type(self)):
-                    self._Start_motor()
-                self._s.write(b"\xA5\x60")
-                sleep(0.5)
-                self._s.read(7)
-                distdict = {}
-                countdict = {}
-                while self._is_scanning:
-                    for i in range(360):
-                        distdict.update({i:[]})
-                    data = self._s.read(self.chunk_size).split(b"\xaa\x55")[1:-1]
-                    for e in data:
-                        try:
-                            if e[0] == 0:
-                                if YdLidarX4._CheckSum(e):
-                                    d = YdLidarX4._Calculate(e)
-                                    for ele in d:
-                                        angle = floor(ele[1])
-                                        if 0 <= angle < 360:
-                                            distdict[angle].append(ele[0])
-                        except Exception:
-                            pass
-                    for (i, k) in distdict.items():
-                        distdict[i] = self._Mean(k)
-                    yield distdict
-            else:
-                raise Exception("Device is currently in scanning mode.")
-        else:
+        which returns a dictionary consisting angle(degrees) and distance(meters), for start_angle <= degrees < end_angle.\n
+        Return Format : {angle(start_angle):distance, angle(start_angle + 1):distance,....................,angle(end_angle - 1):distance}."""
+        if not self._is_connected:
             raise Exception("Device is not connected")
+        if self._is_scanning:
+            raise Exception("Device is currently in scanning mode.")
+        self._is_scanning = True
+        self._s.reset_input_buffer()
+        if "YdLidarX4" in str(type(self)):
+            self._Start_motor()
+        self._s.write(b"\xA5\x60")
+        sleep(0.5)
+        self._s.read(7)
+        distdict = {}
+        countdict = {}
+        while self._is_scanning:
+            for i in range(start_angle, end_angle):
+                distdict.update({i:[]})
+            data = self._s.read(self.chunk_size).split(b"\xaa\x55")[1:-1]
+            for e in data:
+                try:
+                    if e[0] == 0 and YdLidarX4._CheckSum(e):
+                        d = YdLidarX4._Calculate(e)
+                        for ele in d:
+                            angle = floor(ele[1])
+                            if start_angle <= angle < end_angle:
+                                distdict[angle].append(ele[0])
+                except Exception:
+                    pass
+            for (i, k) in distdict.items():
+                distdict[i] = self._Mean(k)
+            yield distdict
 
     def StopScanning(self):
         """Stops scanning but keeps serial connection alive."""
