@@ -4,12 +4,22 @@ import math
 import time
 import numpy
 
+#TODO: provide stub for lidar 
+
+#TODO: threading skelton to complete
+class LidarThread(threading.Thread):
+    def __init__(self, arg):
+        threading.Thread.__init__(self)
+        self.arg = arg
+
+    def run(self):
+        pass
+
 #TODO: adjust threshold
 DISTANCE_THRESHOLD = 1000
 NB_SWEEPS = 10
 NB_AREA = 6
 OFFSET = 0
-#TODO: threading skelton
 
 #TODO: automatic port detection
 port =  input("Enter port name which lidar is connected:")
