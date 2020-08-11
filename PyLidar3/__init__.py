@@ -9,6 +9,7 @@ class FrequencyStep(Enum):
     oneTenthHertz = 1
     oneHertz = 2
 
+##
 class YdLidarX4:
     """Deals with X4 version of Ydlidar from http://www.ydlidar.com/"""
     def __init__(self, port, chunk_size=6000):
